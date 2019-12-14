@@ -14,10 +14,12 @@
     "fmt": "prettier --write '**/*.{js,ts}'",
     "fmt:p": "prettier-package-json --write",
     "lint": "tslint 'src/**/*.ts?'",
+    "tscheck": "tsc --noEmit",
     "start": "node dist/index.js",
     "start:dev": "nodemon",
     "start:list": "nodemon ./src/list.ts",
-    "test": "echo \"OK: no test specified\" && exit 0"
+    "test": "echo \"OK: no test specified\" && exit 0",
+    "check": "yarn lint && yarn tscheck && yarn test"
   },
   "dependencies": {
     "aws-sdk": "^2.590.0",
