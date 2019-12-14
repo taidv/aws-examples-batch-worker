@@ -9,12 +9,15 @@
     "build": "yarn build:clean && yarn build:code",
     "build:clean": "rimraf dist",
     "build:code": "tsc",
+    "docker:build": "docker build -t worker:1.0.0 .",
+    "docker:up": "docker-compose up",
     "fmt": "prettier --write '**/*.{js,ts}'",
     "fmt:p": "prettier-package-json --write",
     "lint": "tslint 'src/**/*.ts?'",
     "start": "node dist/index.js",
     "start:dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:list": "nodemon ./src/list.ts",
+    "test": "echo \"OK: no test specified\" && exit 0"
   },
   "dependencies": {
     "aws-sdk": "^2.590.0",

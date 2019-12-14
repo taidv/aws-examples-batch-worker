@@ -1,0 +1,5 @@
+version: '3'
+services:
+    worker:
+        image: worker:1.0.0
+        env_file: .env

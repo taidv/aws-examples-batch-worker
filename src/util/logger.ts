@@ -2,7 +2,7 @@ import { join } from 'path';
 import { createLogger, format, transports } from 'winston';
 import { AppConfig } from '../config/app.config';
 
-const logDir = AppConfig.logDir;
+const logDir = AppConfig.logDir || '';
 const errorPath = join(logDir, 'error.log');
 const combinedPath = join(logDir, 'combined.log');
 

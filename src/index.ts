@@ -1,14 +1,14 @@
+import { AppConfig } from './config/app.config';
 import { Logger } from './util/logger';
 import { getObjectContent } from './util/s3';
 
-const handleRecord = async record => {
-    if (!record.eventName.startsWith('ObjectCreated')) {
-        return;
-    }
+export interface ICounterEventParams {
+    bucket: string;
+    key: string;
+}
 
-    const bucket = record.s3.bucket.name;
-    const key = record.s3.object.key;
-
+const handleEvent = async (event: ICounterEventParams) => {
+    const { bucket, key } = event;
     const content = await getObjectContent(bucket, key);
     if (!content) {
         return;
@@ -16,11 +16,12 @@ const handleRecord = async record => {
     Logger.info(`The length of ${bucket}/${key} is ${[...content].length}.`);
 };
 
-const main = async event => {
-    for (const record of event.Records) {
-        await handleRecord(record);
-    }
+const main = async () => {
+    const event: ICounterEventParams = {
+        bucket: AppConfig.s3Bucket,
+        key: AppConfig.s3Key,
+    };
+    await handleEvent(event);
 };
 
-import testEvents from './event.json';
-main(testEvents);
+main();

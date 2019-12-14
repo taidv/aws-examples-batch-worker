@@ -16,4 +16,26 @@ const getObjectContent = async (bucket: string, key: string): Promise<string | u
     }
 };
 
-export { getObjectContent };
+const listKeys = async (bucket: string, token?: string): Promise<[string[], string | undefined]> => {
+    try {
+        const opts: any = { Bucket: bucket };
+        if (token) {
+            opts.ContinuationToken = token;
+        }
+
+        const data = await s3.listObjectsV2(opts).promise();
+        const keys = data.Contents.map(object => object.Key);
+        if (!data.IsTruncated) {
+            return [keys, 'end'];
+        }
+        return [keys, data.NextContinuationToken];
+    } catch (error) {
+        Logger.error(`Failed when listing keys of bucket ${bucket}`, { error });
+        if (error.retryable) {
+            return [[], undefined];
+        }
+        return [[], 'error'];
+    }
+};
+
+export { getObjectContent, listKeys };
