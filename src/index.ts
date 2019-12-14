@@ -18,8 +18,8 @@ const handleEvent = async (event: ICounterEventParams) => {
 
 const main = async () => {
     const event: ICounterEventParams = {
-        bucket: AppConfig.s3Bucket,
-        key: AppConfig.s3Key,
+        bucket: process.argv[2],
+        key: process.argv[3],
     };
     await handleEvent(event);
 };

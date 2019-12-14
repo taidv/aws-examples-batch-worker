@@ -8,8 +8,8 @@ Change file `.env.example` to `.env` and update your AWS credentials.
 
 ## Development
 
-Install dependencies by `yarn install`, then `yarn start:dev` to run local
+Install dependencies by `yarn install`, then `yarn start:dev <s3-bucket-name> <s3-key>` or `yarn start <s3-bucket-name> <s3-key>` to run local
 
 ## Docker
 
-`yarn docker:build` to create docker image, then `yarn docker up` to run docker container.
+`yarn docker:build` to create docker image, then `yarn docker:run <s3-bucket-name> <s3-key>` to run in docker container.

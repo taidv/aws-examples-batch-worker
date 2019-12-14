@@ -5,10 +5,10 @@ COPY src/ src/
 RUN [ "yarn", "install" ]
 RUN [ "yarn", "build" ]
 
-FROM node:12-alpine AS linter
+FROM node:12-alpine AS checker
 WORKDIR /tmp
 COPY --from=builder /tmp/ .
-RUN [ "yarn", "lint" ]
+RUN [ "yarn", "check" ]
 
 FROM node:12-alpine AS tester
 WORKDIR /tmp
@@ -21,4 +21,4 @@ WORKDIR /home/node/
 COPY --from=builder /tmp/node_modules /home/node/node_modules
 COPY --from=builder /tmp/dist /home/node/dist
 COPY --from=builder /tmp/package.json /home/node/
-CMD [ "yarn", "start" ]
+ENTRYPOINT [ "yarn", "start" ]
