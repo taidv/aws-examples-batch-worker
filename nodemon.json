@@ -1,0 +1,14 @@
+{
+    "verbose": true,
+    "ignore": [
+        "*.spec.ts",
+        "**/fixtures/*"
+    ],
+    "execMap": {
+        "ts": "node --require ts-node/register"
+    },
+    "watch": [
+        "src /**/*.ts",
+        ".env"
+    ]
+}
