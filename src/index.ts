@@ -13,7 +13,7 @@ const handleEvent = async (event: ICounterEventParams) => {
     if (!content) {
         return;
     }
-    Logger.info(`The length of ${bucket}/${key} is ${[...content].length}.`);
+    Logger.info(`Handled event for ${bucket}/${key}.`);
 };
 
 const main = async () => {
